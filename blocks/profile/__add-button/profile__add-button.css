@@ -7,11 +7,11 @@
     background-position: center;
     border: 1px solid #fff;
     cursor: pointer;
-    z-index: 1;
 }
 
 .profile__add-button:hover {
     opacity: .6;
+    transition: .3s;
 }
 
 @media screen and (max-width: 767px) {
