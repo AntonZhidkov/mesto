@@ -17,55 +17,55 @@
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
+          <button type="button" class="profile__edit-button" aria-label="Редактировать"></button>
         </div>
         <p class="profile__occupation">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__add-button"></button>
+      <button type="button" class="profile__add-button" aria-label="Добавить"></button>
     </section>
     <section class="elements">
-      <div class="element">
+      <article class="element">
         <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаевск" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Карачаевск</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Гора Эльбрус</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Домбай</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Гора Эльбрус</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Домбай</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаево-Черкесия" class="element__pic">
         <div class="element__caption">
           <h2 class="element__pic-name">Карачаево-Черкесия</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer">
@@ -74,10 +74,12 @@
   <div class="popup">
     <div class="popup__content">
       <h2 class="popup__header">Редактировать профиль</h2>
-      <input type="text" placeholder="Жак-Ив Кусто" name="popup__name" class="popup__input popup__input_type_name" autocomplete="off">
-      <input type="text" placeholder="Исследователь океана" name="popup__occupation" class="popup__input popup__input_type_occupation" autocomplete="off">
-      <button type="button" class="popup__save-button">Сохранить</button>
-      <button type="button" class="popup__close-button"></button>
+      <form action="#" name="popup-edit-form" class="popup__edit-form">
+        <input type="text" placeholder="Жак-Ив Кусто" name="popup__name" class="popup__input popup__input_type_name" autocomplete="off">
+        <input type="text" placeholder="Исследователь океана" name="popup__occupation" class="popup__input popup__input_type_occupation" autocomplete="off">
+        <button type="submit" class="popup__save-button" aria-label="Сохранить">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
     </div>
   </div>
   <script src="./scripts/index.js"></script>
