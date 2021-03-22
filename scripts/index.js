@@ -1,8 +1,7 @@
 let popup = document.querySelector('.popup');
-let popupForm = document.querySelector('.popup__edit-form');
+let popupForm = document.querySelector('.popup__form');
 let openPopupBtn = document.querySelector('.profile__edit-button');
 let closePopupBtn = document.querySelector('.popup__close-button');
-let savePopupBtn = document.querySelector('.popup__save-button');
 let popupName = document.querySelector('.popup__input_type_name');
 let popupOccupation = document.querySelector('.popup__input_type_occupation');
 let profileName = document.querySelector('.profile__name');
@@ -19,14 +18,6 @@ function closePopup () {
     popup.classList.remove('popup_visible');
 };
 
-/*before review...
-function editProfile () {
-    profileName.textContent = popupName.value;
-    profileOccupation.textContent = popupOccupation.value;
-    closePopup()
-};*/
-
-/*after review...*/
 function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = popupName.value;
@@ -34,13 +25,10 @@ function formSubmitHandler (evt) {
     closePopup()
 };
 
+
 openPopupBtn.addEventListener('click', openPopup);
 
 closePopupBtn.addEventListener('click', closePopup);
 
-/*before review...
-savePopupBtn.addEventListener('click', editProfile);*/
-
-/*after review...*/
 popupForm.addEventListener('submit', formSubmitHandler);
 
