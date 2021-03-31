@@ -7,11 +7,15 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
+
 <body class="page">
+
   <header class="header">
     <img src="./images/logo.svg" alt="Место-Россия" class="header__logo">
   </header>
+
   <main>
+
     <section class="profile">
       <img src="./images/image.png" alt="Жак-Ив Кусто" class="profile__avatar">
       <div class="profile__info">
@@ -23,7 +27,19 @@
       </div>
       <button type="button" class="profile__add-button" aria-label="Добавить"></button>
     </section>
+
     <section class="elements">
+      <template class="template-card">
+        <article class="element">
+          <img class="element__pic">
+          <button type="button" class="element__delete"></button>
+          <div class="element__caption">
+            <h2 class="element__pic-name"></h2>
+            <button type="button" class="element__pic-like"></button>
+          </div>
+        </article>
+      </template>
+      <!-- пока закоментил, чтобы не потерялось ;)
       <article class="element">
         <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаевск" class="element__pic">
         <div class="element__caption">
@@ -65,13 +81,16 @@
           <h2 class="element__pic-name">Карачаево-Черкесия</h2>
           <button type="button" class="element__pic-like"></button>
         </div>
-      </article>
+      </article>-->
     </section>
+
   </main>
+
   <footer class="footer">
     <h3 class="footer__copyright">&copy; 2021 Mesto Russia</h3>
   </footer>
-  <div class="popup">
+
+  <div class="popup popup_edit">
     <div class="popup__content">
       <h2 class="popup__header">Редактировать профиль</h2>
       <form action="#" name="popup-form" class="popup__form">
@@ -82,6 +101,28 @@
       <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
     </div>
   </div>
+
+  <div class="popup popup_spot">
+    <div class="popup__content">
+      <h2 class="popup__header">Новое место</h2>
+      <form action="#" name="popup-form" class="popup__form">
+        <input type="text" placeholder="Название" name="popup__name" class="popup__input popup__input_type_name" autocomplete="off">
+        <input type="text" placeholder="Ссылка на картинку" name="popup__occupation" class="popup__input popup__input_type_occupation" autocomplete="off">
+        <button type="submit" class="popup__save-button" aria-label="Сохранить">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
+    </div>
+  </div>
+
+  <div class="popup popup-card">
+    <div class="popup-card__container">
+      <button type="button" class="popup-card__close-button"></button>
+      <img class="popup-card__img">
+      <p class="popup-card__caption"></p>
+    </div>
+  </div>
+
   <script src="./scripts/index.js"></script>
+
 </body>
 </html>

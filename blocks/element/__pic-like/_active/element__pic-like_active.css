@@ -1,16 +1,12 @@
-.element__pic-like {
+.element__pic-like_active {
+    background-image: url(../../../../images/like_active.svg);
     width: 22px;
     height: 19px;
-    background-image: url(../../../images/like.svg);
     background-position: center;
     border: none;
     background-color: #fff;
     cursor: pointer;
     padding: 0;
     outline: none;
-    transition: .3s;
-}
-
-.element__pic-like:hover {
-    opacity: .5;
+    transition: .1s;
 }
