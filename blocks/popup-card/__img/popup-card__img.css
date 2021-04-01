@@ -1,4 +1,11 @@
-.poup-card__img {
-    max-height: 75vh;
-    width: 100%;
+.popup-card__img {
+    max-height: 540px;
+    max-width: 816px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+    .popup-card__img {
+        max-width: 240px;
+    }
 }

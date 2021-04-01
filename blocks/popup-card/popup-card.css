@@ -1,5 +1,5 @@
 .popup-card {
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -11,5 +11,5 @@
     background-color: rgba(0, 0, 0, .5);
     visibility: hidden;
     opacity: 0;
-    transition: visibility .3s, opacity .3s linear;
+    transition: visibility .3s, opacity .3s linear;*/
 }
