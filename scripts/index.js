@@ -1,4 +1,4 @@
-const popup = document.querySelector('.popup');
+/*const popup = document.querySelector('.popup');*/
 const popupEdit = document.querySelector('.popup_edit');
 const popupForm = document.querySelector('.popup__form');
 const openPopupBtn = document.querySelector('.profile__edit-button');
@@ -13,37 +13,14 @@ const popupFormSpot = popupSpot.querySelector('.popup__form');
 const openPopupSpotBtn = document.querySelector('.profile__add-button');
 const closePopupSpotBtn = popupSpot.querySelector('.popup__close-button');
 const popupCard = document.querySelector('.popup-card');
-const closePopupCard = document.querySelector('.popup-card__close-button');
+const closePopupCard = popupCard.querySelector('.popup__close-button');
 const popupSoptName = popupSpot.querySelector('.popup__input_type_name');
 const popupSpotUrl = popupSpot.querySelector('.popup__input_type_occupation');
 const spotElements = document.createDocumentFragment();
 const spots = document.querySelector('.elements');
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+/*const elementPic = document.querySelector('.element__pic');
+const elementPicLike = document.querySelector('.element__pic-like');
+const elementPicName = document.querySelector('.element__pic-name');*/
 
 // открываем попап
 function openPopup (popup) {
@@ -57,9 +34,9 @@ function closePopup (popup) {
 
 // открываем профиль-попап с юзер-данными 
 function openPopupEdit () {
-  openPopup(popupEdit);
   popupName.value = profileName.textContent;
   popupOccupation.value = profileOccupation.textContent;
+  openPopup(popupEdit);
 }
 
 // форма редактирования/добавления юзера в профиль-попапе
@@ -75,14 +52,13 @@ function formSubmitHandlerAdd (evt) {
   evt.preventDefault();
   const spotValue = popupSoptName.value;
   const linkValue = popupSpotUrl.value;
-  const spotArr = { name: spotValue, link: linkValue};
-  const spotElement = createCard(spotArr);
+  const spotElement = createCard({ name: spotValue, link: linkValue});
   spots.prepend(spotElement);
   closePopup(popupSpot);
-  popupSoptName.value = '', popupSpotUrl.value = '';
+  popupFormSpot.reset();
 };
 
-// функция создания карточки 
+// функция создания карточки
 function createCard (cardInfo) {
   const spotElement = templateCard.cloneNode(true);
   const popupImg = document.querySelector('.popup-card__img');
@@ -112,9 +88,81 @@ initialCards.forEach(function (spotElement) {
 spots.append(spotElements);
 
 openPopupBtn.addEventListener('click', openPopupEdit);
-closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
-popupForm.addEventListener('submit', formSubmitHandler);
 openPopupSpotBtn.addEventListener('click', () => openPopup(popupSpot));
-closePopupSpotBtn.addEventListener('click', () => closePopup(popupSpot));
-popupFormSpot.addEventListener('submit', formSubmitHandlerAdd);
+closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
 closePopupCard.addEventListener('click', () => closePopup(popupCard));
+closePopupSpotBtn.addEventListener('click', () => closePopup(popupSpot));
+popupForm.addEventListener('submit', formSubmitHandler);
+popupFormSpot.addEventListener('submit', formSubmitHandlerAdd);
+
+
+
+
+/*
+function onCardLike(event) {
+  // Тут ставите/снимаете лайк с иконки. Иконка находится в event.target, т.к. на ней и установлен слушатель.
+}
+function onCardImagePopup(event) {
+  // Тут открываете попап с большой картинкой. Картинка находится в event.target, , т.к. на ней и установлен слушатель.
+}
+// Общая функция, которая создаёт DOM-элемент с карточкой и возращает его.
+function createCard(cardData) {
+  // Находим шаблон и клонируем его
+  const element = document.querySelector('.template').cloneNode(true);
+  // Находим элементы в **клонированном шаблоне**, с которыми будем работать.
+  const titleElement = element.querySelector('.card__title');
+  const imageElement = element.querySelector('.card__image');
+  const likeIconElement = element.querySelector('.card__like');
+  const removeIconElement = element.querySelector('.card__remove');
+  // Устанавливаем заголовок и URL картинки из объекта параметров (аргумента функции)
+  titleElement.textContent = cardData.title;
+  imageElement.src = cardData.link;
+  // Устанавливаем слушатели нажатий.
+  likeIconElement.addEventListener('click', onCardLike);
+  removeIconElement.addEventListener('click', onCardImagePopup);
+  // Возвращаем готовый элемент DOM.
+  // Обратите внимание, мы его никуда не вставили на страницу, в DOM его нет.
+  // Он пока хранится в переменной в памяти и нигде больше.
+  return element;
+}
+// Массив первоначальных карточек
+const cards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+];
+// Элемент, куда будем вставлять карточки.
+const cardsContainer = document.querySelector('.cards');
+// Итерируемся по карточкам в цикле. Для каждой карточки создаем элемент DOM из шаблона и вставляем его в страницу.
+cards.forEach((card) => {
+  // Создали DOM элемент (его возвращает функция).
+  const cardElement = createCard(card);
+  // Вставили его на страницу.
+  cardsContainer.append(cardElement);
+});
+// Форма добавления новой карточки.
+const formElement = document.querySelector('.form');
+// Инпуты с данными этой формы
+const formInputName = formElement.querySelector('form__name');
+const formInputImage = formElement.querySelector('form__image');
+// Функция-коллбэк события отправки формы.
+function onFormSubmit(event) {
+  // Предотвращаем перезагрузку страницы при реальной отправке формы.
+  event.preventDefault();
+  // Достаём значения из инпутов.
+  const name = formInputName.value;
+  const imageSrc = formInputImage.value;
+  // Создаём объект для передачи в функцию создания элемента-карточки.
+  // Она на входе ожидает объект, а у нас пока только 2 строки есть.
+  const cardData = {
+    name: name,
+    link: imageSrc
+  };
+  // Получаем DOM-элемент из функции.
+  const cardElement = createCard(cardData);
+  // Вставляем его в DOM, но первым ребёнком, а не в конце, как первоначальные карточки.
+  cardsContainer.prepend(cardElement);
+}
+// Слушаем отправку формы
+formElement.addEventListener('submit', onFormSubmit);*/
