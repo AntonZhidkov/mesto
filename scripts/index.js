@@ -22,12 +22,43 @@ const popupCaption = document.querySelector('.popup-card__caption');
 // открываем попап
 function openPopup (popup) {
   popup.classList.add('popup_visible');
+  document.addEventListener('keydown', escapeClosePopup); // слушаем нажатие на Escape
+  document.addEventListener('click', overlayClosePopup); // слушаем клик по оверлэй
 };
 
 // закрываем попап
 function closePopup (popup) {
   popup.classList.remove('popup_visible');
+  document.removeEventListener('keydown', escapeClosePopup);
+  document.removeEventListener('click', overlayClosePopup);
 };
+
+// закрываем попап эскейпом
+function escapeClosePopup (evt) {
+  const openedPopup = document.querySelector('.popup_visible');
+  if (evt.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+};
+
+// закрываем попап кликом на оверлэй
+function overlayClosePopup (evt) {
+  const openedPopup = document.querySelector('.popup_visible');
+  if (evt.target.classList.contains('popup')) {
+    closePopup(openedPopup);
+  }
+};
+
+//document.addEventListener('click', overlayClosePopup);
+  
+  
+  //console.log(openedPopup);
+  //document.addEventListener('keydown', evt => {
+    //if(evt.key === 'Escape') {
+      //closePopup (openedPopup);
+    //}
+  //});
+//};
 
 // открываем профиль-попап с юзер-данными 
 function openPopupEdit () {

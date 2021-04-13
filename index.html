@@ -50,9 +50,11 @@
   <div class="popup popup_edit">
     <div class="popup__content">
       <h2 class="popup__header">Редактировать профиль</h2>
-      <form action="#" name="popup-form" class="popup__form">
-        <input type="text" placeholder="Жак-Ив Кусто" name="popup__name" class="popup__input popup__input_type_name" autocomplete="off">
-        <input type="text" placeholder="Исследователь океана" name="popup__occupation" class="popup__input popup__input_type_occupation" autocomplete="off">
+      <form action="#" name="popup-form" class="popup__form" novalidate>
+        <input id="name-input" type="text" placeholder="Имя" name="popup__name" class="popup__input popup__input_type_name" required minlength="2" maxlength="40" autocomplete="off">
+        <span class="popup__input-error name-input-error"></span>
+        <input id="occupation-input" type="text" placeholder="О себе" name="popup__occupation" class="popup__input popup__input_type_occupation" required minlength="2" maxlength="200" autocomplete="off">
+        <span class="popup__input-error occupation-input-error"></span>
         <button type="submit" class="popup__save-button" aria-label="Сохранить">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
@@ -62,10 +64,12 @@
   <div class="popup popup_spot">
     <div class="popup__content">
       <h2 class="popup__header">Новое место</h2>
-      <form action="#" name="popup-form" class="popup__form popup__form_spot">
-        <input type="text" placeholder="Название" name="popup__name" class="popup__input popup__input_type_name" autocomplete="off">
-        <input type="text" placeholder="Ссылка на картинку" name="popup__occupation" class="popup__input popup__input_type_occupation" autocomplete="off">
-        <button type="submit" class="popup__save-button" aria-label="Сохранить">Сохранить</button>
+      <form action="#" name="popup-form" class="popup__form popup__form_spot" novalidate>
+        <input id="spot-input" type="text" placeholder="Название" name="popup__name" class="popup__input popup__input_type_name" required minlength="2" maxlength="30" autocomplete="off">
+        <span class="popup__input-error spot-input-error"></span>
+        <input id="url-input" type="url" placeholder="Ссылка на картинку" name="popup__occupation" class="popup__input popup__input_type_occupation" required autocomplete="off">
+        <span class="popup__input-error url-input-error"></span>
+        <button type="submit" class="popup__save-button popup__save-button_inactive" aria-label="Сохранить">Сохранить</button>
       </form>
       <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
     </div>
@@ -81,6 +85,7 @@
 
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
   
 </body>
 </html>
