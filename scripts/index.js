@@ -18,6 +18,7 @@ const popupSpotUrl = popupSpot.querySelector('.popup__input_type_occupation');
 const spots = document.querySelector('.elements');
 const popupImg = document.querySelector('.popup-card__img');
 const popupCaption = document.querySelector('.popup-card__caption');
+const submitButton = popupSpot.querySelector('.popup__save-button');
 
 // открываем попап
 function openPopup (popup) {
@@ -35,30 +36,18 @@ function closePopup (popup) {
 
 // закрываем попап эскейпом
 function escapeClosePopup (evt) {
-  const openedPopup = document.querySelector('.popup_visible');
   if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_visible');
     closePopup(openedPopup);
   }
 };
 
 // закрываем попап кликом на оверлэй
 function overlayClosePopup (evt) {
-  const openedPopup = document.querySelector('.popup_visible');
   if (evt.target.classList.contains('popup')) {
-    closePopup(openedPopup);
+    closePopup(evt.target);
   }
 };
-
-//document.addEventListener('click', overlayClosePopup);
-  
-  
-  //console.log(openedPopup);
-  //document.addEventListener('keydown', evt => {
-    //if(evt.key === 'Escape') {
-      //closePopup (openedPopup);
-    //}
-  //});
-//};
 
 // открываем профиль-попап с юзер-данными 
 function openPopupEdit () {
@@ -128,7 +117,10 @@ initialCards.forEach((card) => {
 
 // слушаем открытие попапов
 openPopupBtn.addEventListener('click', openPopupEdit);
-openPopupSpotBtn.addEventListener('click', () => openPopup(popupSpot));
+openPopupSpotBtn.addEventListener('click', function () {
+  submitButton.classList.add('popup__save-button_inactive'); // отключаем кнопку сабмита перед открытием попапа
+  openPopup(popupSpot);
+});
 
 // слушаем закрытие попапов
 closePopupBtn.addEventListener('click', () => closePopup(popupEdit));

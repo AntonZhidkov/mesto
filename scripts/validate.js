@@ -9,10 +9,6 @@ const validationConfig = {
     errorClass: 'popup__input-error_active'
   }
   
-  // объявляем переменные, соответствующие элементам форм
-  const form = document.querySelector(validationConfig.formSelector);
-  const input = form.querySelector(validationConfig.inputSelector);
-  
   // добавляем свойства с ошибкой елементу формы
   const showInputError = (form, input, errorMessage) => {
     const errorElement = form.querySelector(`.${input.id}-error`); // находим элемент ошибки
