@@ -1,5 +1,6 @@
 import {initialCards} from './cards.js';
 import FormValidator from './validate.js';
+import Card from './Card.js';
 const popupEdit = document.querySelector('.popup_edit');
 const popupForm = document.querySelector('.popup__form');
 const openPopupBtn = document.querySelector('.profile__edit-button');
@@ -20,7 +21,6 @@ const popupSoptName = popupSpot.querySelector('.popup__input_type_name');
 const popupSpotUrl = popupSpot.querySelector('.popup__input_type_occupation');
 const spots = document.querySelector('.elements');
 const submitButton = popupSpot.querySelector('.popup__save-button');
-//const templateCard = document.querySelector('.template-card').content;
 
 // открываем попап
 function openPopup (popup) {
@@ -77,91 +77,7 @@ function formSubmitHandlerAdd (evt) {
   popupFormSpot.reset();
 };
 
-//ставим/снимаем лайки
-/*function onCardLike (evt) {
-  evt.target.classList.toggle('element__pic-like_active');
-};*/
-
-//удаляем карточку
-/*function onCardRemove (evt) {
-  evt.target.closest('.element').remove();
-};*/
-
-/* открываем попап карточки
-function handleCardClick(data) {
-  popupImg.src = data.link;;
-  popupImg.alt = data.name;
-  popupCaption.textContent = data.name;
-  openPopup(popupCard);
-};*/
-
-
-
-// функция создания карточки
-/*
-function createCard (data) {
-  const spotElement = templateCard.cloneNode(true);
-  const elementPic = spotElement.querySelector('.element__pic');
-  const elementPicName = spotElement.querySelector('.element__pic-name');
-  const elementPicLike = spotElement.querySelector('.element__pic-like');
-  const elementDelete = spotElement.querySelector('.element__delete');
-  elementPic.src = data.link;
-  elementPic.alt = data.name;
-  elementPicName.textContent = data.name;
-  // слушаем лайки, ремувы и открытие попапа карточки
-  elementPicLike.addEventListener('click', onCardLike);
-  elementDelete.addEventListener('click', onCardRemove);
-  elementPic.addEventListener('click', () => handleCardClick(data));
-  return spotElement;
-};*/
-
-class Card {
-  constructor(data, cardSelector, handleCardClick) {
-      this._name = data.name;
-      this._link = data.link;
-      this._cardSelector = cardSelector;
-      this._handleCardClick = handleCardClick;
-  }
-
-  _getTemplate() {
-      const cardElement = document
-      .querySelector(this._cardSelector).content
-      .querySelector('.element').cloneNode(true);
-      return(cardElement);
-  }
-
-  generateCard() {
-      this._element = this._getTemplate();
-      const cardPic = this._element.querySelector('.element__pic');
-      const cardText = this._element.querySelector('.element__pic-name');
-      cardPic.src = this._link;
-      cardPic.alt = this._name;
-      cardText.textContent = this._name;
-      this._SetEventListeners();
-      return this._element;
-    }
-
-  _SetEventListeners() {
-    this._element.querySelector('.element__pic-like').addEventListener('click', () => {
-      this._onCardLike();
-    })
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
-      this._onCardRemove();
-    })
-    this._element.querySelector('.element__pic').addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link);
-    })
-  }
-
-  _onCardLike() {
-    this._element.querySelector('.element__pic-like').classList.toggle('element__pic-like_active');
-  }
-
-  _onCardRemove() {
-    this._element.closest('.element').remove();
-  }
-};
-
+// открываем попап карточки
 function handleCardClick(link, name) {
   popupImg.src = link;
   popupImg.alt = name;
@@ -169,11 +85,10 @@ function handleCardClick(link, name) {
   openPopup(popupCard);
 };
 
-
 // подключаем карточки 'из коробки'
 const cardsContainer = document.querySelector('.elements');
-initialCards.forEach((item/*сard*/) => {
-  const cardElement = new Card(item, '.template-card');/*createCard(сard);*/
+initialCards.forEach((item) => {
+  const cardElement = new Card(item, '.template-card', handleCardClick);
   const cardReady = cardElement.generateCard();
   cardsContainer.append(cardReady);
 });
