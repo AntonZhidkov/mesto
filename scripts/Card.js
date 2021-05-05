@@ -19,28 +19,31 @@ export default class Card {
       this._element = this._getTemplate();
       const cardPic = this._element.querySelector('.element__pic');
       const cardText = this._element.querySelector('.element__pic-name');
+      const cardLike = this._element.querySelector('.element__pic-like');
+      this._cardLike = cardLike;
+      this._cardPic = cardPic;
       cardPic.src = this._link;
       cardPic.alt = this._name;
       cardText.textContent = this._name;
-      this._SetEventListeners();
+      this._setEventListeners();
       return this._element;
     }
 
     // слушаем лайки, ремувы, открытие попапа карточки. коллбэком вызываем соответствующие функции
-  _SetEventListeners() {
-    this._element.querySelector('.element__pic-like').addEventListener('click', () => {
+  _setEventListeners() {
+    this._cardLike.addEventListener('click', () => {
       this._onCardLike();
     })
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._onCardRemove();
     })
-    this._element.querySelector('.element__pic').addEventListener('click', () => {
+    this._cardPic.addEventListener('click', () => {
       this._handleCardClick(this._link, this._name,);
     })
   }
 
   _onCardLike() {
-    this._element.querySelector('.element__pic-like').classList.toggle('element__pic-like_active');
+    this._cardLike.classList.toggle('element__pic-like_active');
   }
 
   _onCardRemove() {
