@@ -2,6 +2,7 @@ import {initialCards} from './cards.js';
 import FormValidator from './FormValidator.js';
 import {validationConfig} from './FormValidator.js';
 import Card from './Card.js';
+
 const popupEdit = document.querySelector('.popup_edit');
 const popupForm = document.querySelector('.popup__form');
 const openEditProfilePopupBtn = document.querySelector('.profile__edit-button');
@@ -23,6 +24,11 @@ const inputCardUrl = popupSpot.querySelector('.popup__input_type_spot-url');
 const spots = document.querySelector('.elements');
 const submitButton = popupSpot.querySelector('.popup__save-button');
 const saveButton = popupEdit.querySelector('.popup__save-button');
+const addCardFormValidator = new FormValidator(validationConfig, popupSpot);
+const editProfileFormValidator = new FormValidator(validationConfig, popupEdit);
+editProfileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+const cardTemplateSelector = '.template-card';
 
 // открываем попап
 function openPopup (popup) {
@@ -70,7 +76,7 @@ function formEditProfileSubmitHandler (evt) {
 
 // создаём экземпляр карточки при помощи класса Card
 function createCard(data) {
-  const cardElement = new Card(data, '.template-card', handleCardClick);
+  const cardElement = new Card(data, cardTemplateSelector, handleCardClick);
   return cardElement.generateCard();
 };
 
@@ -98,30 +104,18 @@ initialCards.forEach((item) => {
   cardsContainer.append(createCard(item));
 });
 
-// удаляем ошибки валидации
-function removeInputError(formElement) {
-  const inputListform = formElement.querySelectorAll('.popup__input');
-  inputListform.forEach((input)=> {
-    const errorElement = formElement.querySelector(`.${input.id}-error`);
-    errorElement.textContent = '';
-    input.classList.remove('popup__input_type_error');
-  });
-};
-
 // слушаем открытие, сбрасываем предыдущие ошибки, валидируем
 openEditProfilePopupBtn.addEventListener('click', () => {
-  removeInputError(popupEdit);
-  saveButton.classList.remove('popup__save-button_inactive'); 
-  new FormValidator(validationConfig, popupEdit).enableValidation();
+  editProfileFormValidator.removeInputError();
+  editProfileFormValidator.activateSubmitButton();
   openPopupEdit();
 });
 
 // слушаем открытие, сбрасываем предыдущие ошибки, валидируем
 openPopupSpotBtn.addEventListener('click', () => {
-  removeInputError(popupSpot);
+  addCardFormValidator.removeInputError();
+  addCardFormValidator.deactivateSubmitButton();
   popupFormSpot.reset(); 
-  submitButton.classList.add('popup__save-button_inactive'); // отключаем кнопку сабмита перед открытием попапа
-  new FormValidator(validationConfig, popupSpot).enableValidation();
   openPopup(popupSpot);
 });
 

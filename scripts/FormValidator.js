@@ -13,6 +13,30 @@ export default class FormValidator {
     this._formElement = formElement;
   }
 
+  // сбрасываем ошибки валидации
+  removeInputError() {
+    this._inputList.forEach((input)=> {
+      const errorElement = this._formElement.querySelector(`.${input.id}-error`);
+      errorElement.textContent = '';
+      input.classList.remove(this._validationConfig.errorClass);
+      input.classList.remove(this._validationConfig.inputErrorClass);
+    });
+  };
+
+  // активируем кнопку сабмита
+  activateSubmitButton() {
+    const submitButton = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
+    submitButton.classList.remove(this._validationConfig.inactiveButtonClass);
+    submitButton.disabled = false;
+  };
+    
+  // деактивируем кнопку сабмита
+  deactivateSubmitButton() {
+    const submitButton = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
+    submitButton.classList.add(this._validationConfig.inactiveButtonClass);
+    submitButton.disabled = true;
+  };
+
   // добавляем свойства с ошибкой елементу формы
   _showInputError = (input, errorMessage) => {
     const errorElement = this._formElement.querySelector(`.${input.id}-error`); // находим элемент ошибки
@@ -40,12 +64,12 @@ export default class FormValidator {
   
   // ищем инпуты, слушаем и вызываем  isValid на каждый ввод символа
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector)); // сводим все инпуты в массив
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector)); // сводим все инпуты в массив
     const submitButton = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
-    inputList.forEach((input) => { // проходим по каждому
+    this._inputList.forEach((input) => { // проходим по каждому
       input.addEventListener('input', () => { // слушаем
         this._isValid(input) // вызываем проверку на валидность
-        this._toggleButtonState(inputList, submitButton); // вызываем проверку инпутов и изменение активности кнопки
+        this._toggleButtonState(this._inputList, submitButton); // вызываем проверку инпутов и изменение активности кнопки
       });
     });
   };
@@ -57,7 +81,7 @@ export default class FormValidator {
       });
       this._setEventListeners(); // вызываем прослушку инпутов
   };
-  
+
   // принимаем массив инпутов и валидируем каждый
   _hasInvalidInput = (inputList) => {
     return inputList.some((input) => {
